@@ -1,0 +1,2 @@
+module MainPagaHelper
+end
