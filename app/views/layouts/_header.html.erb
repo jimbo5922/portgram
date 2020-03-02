@@ -3,8 +3,12 @@
   <%= link_to "Portgram", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "お気に入り", '#' %></li>
-        <li><%= link_to "マイページ", '#' %></li>
+        <% if logged_in? %>
+          <li><%= link_to "投稿", '#' %></li>
+          <li><%= link_to "お気に入り", '#' %></li>
+          <li><%= link_to "マイページ", '#' %></li>
+          <li><%= link_to "ログアウト", '#' %></li>
+        <% end %>
       </ul>
     </nav>
   </div>
