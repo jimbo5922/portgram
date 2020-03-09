@@ -33,3 +33,6 @@ yarn-debug.log*
 /lib/*
 /node_modules/*
 /vendor/*
+
+# ignore uploaded images
+/public/uploads

@@ -5,6 +5,8 @@ ruby '2.6.3'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'bcrypt'
 gem 'faker'
+gem 'carrierwave'
+gem 'mini_magick'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'puma', '~> 4.1'
@@ -33,4 +35,5 @@ end
 
 group :production do
   gem 'pg'
+  gem 'fog'
 end

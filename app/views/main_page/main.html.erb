@@ -1,8 +1,21 @@
-<div class="center jumbotron landing">
-  <h1>Portgram</h1>
-  <p>海での思い出をみんなと共有しよう</p>
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %> 
+  <div class="center jumbotron landing">
+    <h1>Portgram</h1>
+    <p>海での思い出をみんなと共有しよう</p>
 
-  <%= link_to "今すぐ始める", signup_path, class:"btn btn-lg btn-primary" %>
-  <%= link_to "ログイン", "#", class:"btn btn-lg btn-primary" %>
-  <%= link_to "かんたんログイン", "#", class:"btn btn-lg btn-primary" %>
-</div>
+    <%= link_to "今すぐ始める", signup_path, class:"btn btn-lg btn-primary" %>
+    <%= link_to "ログイン", login_path, class:"btn btn-lg btn-primary" %>
+    <%= link_to "かんたんログイン", "#", class:"btn btn-lg btn-primary" %>
+  </div>
+<% end %>
