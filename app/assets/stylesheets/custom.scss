@@ -166,6 +166,41 @@ aside {
   margin-top: 15px;
 }
 
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+  a {
+    padding: 0 10px;
+    &:first-child {
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
+  a {
+    padding: 0;
+  }
+}
+
+.users.follow {
+  padding: 0;
+}
+
+.follow_index {
+  margin: 10px 0 20px 20px;
+}
+
 /* forms */
 
 input, textarea, select, .uneditable-input {

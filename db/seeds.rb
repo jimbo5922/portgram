@@ -7,8 +7,9 @@ User.create!(name: "テストユーザ", email: "test@test.com", password: "test
   User.create!(name: name, email: email, password: password, password_confirmation: password)
 end
 
-users = User.order(:created_at).take(2)
-3.times do
-  content = Faker::Lorem.sentence(5)
-  users.each { |user| user.microposts.create!(content: content) }
-end
+users = User.all
+user = users.first
+following = users[2..15]
+followers = users[3..10]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
