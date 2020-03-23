@@ -10,12 +10,12 @@
     </div>
   </div>
 <% else %> 
-  <div class="center jumbotron landing">
+  <div class="center jumbotron background">
     <h1>Portgram</h1>
     <p>海での思い出をみんなと共有しよう</p>
 
     <%= link_to "今すぐ始める", signup_path, class:"btn btn-lg btn-primary" %>
     <%= link_to "ログイン", login_path, class:"btn btn-lg btn-primary" %>
-    <%= link_to "かんたんログイン", "#", class:"btn btn-lg btn-primary" %>
+    <%= link_to "かんたんログイン", testsessions_path, method: :post, class:"btn btn-lg btn-primary" %>
   </div>
 <% end %>
