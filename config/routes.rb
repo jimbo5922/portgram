@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+  get 'likes/destroy'
   get 'sessions/new'
   root 'main_page#main'
   get '/signup', to: 'users#new'
@@ -14,4 +16,5 @@ Rails.application.routes.draw do
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :testsessions, only: :create
+  resources :likes, only: [:create, :destroy]
 end
