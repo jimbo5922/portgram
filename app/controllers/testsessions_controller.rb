@@ -3,6 +3,6 @@ class TestsessionsController < ApplicationController
     user = User.find_by(email:"test@test.com")
     session[:user_id] = user.id
     flash[:success] = "テストユーザとしてログインしました。"
-    redirect_to user
+    redirect_to root_url
   end
 end
