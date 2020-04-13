@@ -14,7 +14,7 @@ gem 'bootstrap-sass'
 gem 'sass-rails', '>= 6'
 gem 'bootstrap'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'webpacker', '~> 4.0'
+gem 'webpacker'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
