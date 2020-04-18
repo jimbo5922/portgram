@@ -5,7 +5,7 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      flash[:success] = "投稿しました！"
+      flash[:success] = "投稿しました"
       redirect_to root_url
     else
       @feed_items = []
@@ -21,6 +21,12 @@ class MicropostsController < ApplicationController
 
   def new
     @micropost = current_user.microposts.build if logged_in?
+  end
+
+  def show 
+    @micropost = Micropost.find(params[:id])
+    @comment = Comment.new
+    @user = User.find_by(id: @micropost.user_id)
   end
 
   private
