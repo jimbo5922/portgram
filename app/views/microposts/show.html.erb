@@ -1,0 +1,35 @@
+<li id="@micropost-<%= @micropost.id %>" data-@micropost-id="<%= @micropost.id %>">
+  <%= link_to gravatar_for(@micropost.user, size: 50), @micropost.user %>
+  <%= link_to @micropost.user.name, @micropost.user %>
+  <span class="content">
+    <%= @micropost.content %>
+    <%= image_tag @micropost.picture.url if @micropost.picture? %>
+  </span>
+  <span class="timestamp">
+    <%= time_ago_in_words(@micropost.created_at) %>前に投稿
+    <% if current_user?(@micropost.user) %>
+      <%= link_to "削除", @micropost, method: :delete, data: { confirm: "削除してもよろしいですか？" } %>
+    <% end %>
+  </span>
+</li>
+<div class="comment_index">
+    <% @micropost.comments.each do |comment| %>
+      <%= link_to gravatar_for(comment.user, size: 50), comment.user %>
+      <%= link_to comment.user.name, comment.user %>
+      <%= comment.content %>
+      <%= time_ago_in_words(comment.created_at) %>前に投稿
+      <span class="delete">
+        <%= link_to "削除", [@micropost, comment], method: :delete if current_user?(comment.user) %>
+      </span>
+    <% end %>
+  </div>
+  <div class="comment-form">
+    <%= form_for([@micropost, @comment]) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="field">
+        <%= f.text_area :content, placeholder: "コメントを入力" %>
+      </div>
+      <%= f.submit "投稿", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</li>
