@@ -3,6 +3,7 @@ class Micropost < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :love_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
@@ -20,6 +21,10 @@ class Micropost < ApplicationRecord
 
   def love?(user)
     love_users.include?(user)
+  end
+
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
   end
 
   private

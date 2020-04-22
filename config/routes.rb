@@ -8,14 +8,19 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/newpost', to: 'microposts#new'
+
   resources :users do
     member do
       get :following, :followers
     end
+    resources :favorites, only: :index
   end
+
   resources :microposts, only: [:create, :destroy, :show] do
     resources :comments, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
   end
+  
   resources :relationships, only: [:create, :destroy]
   resources :testsessions, only: :create
   resources :likes, only: [:create, :destroy]
