@@ -27,6 +27,14 @@ class Micropost < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
+  def self.search(search)
+    if search
+      where(['content LIKE ?', "%#{search}%"])
+    else
+      all
+    end
+  end
+
   private
 
     def picture_size
