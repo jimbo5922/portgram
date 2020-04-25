@@ -3,15 +3,28 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@micropost) do |f| %>
+    <%= form_with(model: @micropost, local: true) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="field">
         <%= f.text_area :content, placeholder: "本文を入力" %>
       </div>
-      <%= f.submit "投稿する", class: "btn btn-primary" %>
+      <div class="micropost_rate">
+        <p>海水浴場の評価</p>
+        <%= f.radio_button :rate, :"非常に悪い" %>
+        <%= f.label :rate, "非常に悪い", value: :"非常に悪い" %>
+        <%= f.radio_button :rate, :"悪い" %>
+        <%= f.label :rate, "悪い", value: :"悪い" %>
+        <%= f.radio_button :rate, :"普通", checked: true %>
+        <%= f.label :rate, "普通", value: :"普通" %>
+        <%= f.radio_button :rate, :"良い" %>
+        <%= f.label :rate, "良い", value: :"良い" %>
+        <%= f.radio_button :rate, :"非常に良い" %>
+        <%= f.label :rate, "非常に良い", value: :"非常に良い" %>
+      </div>
       <span class="picture">
         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
       </span>
+      <%= f.submit "投稿する", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
