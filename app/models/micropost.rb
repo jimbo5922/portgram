@@ -6,10 +6,14 @@ class Micropost < ApplicationRecord
   has_many :favorites, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
+
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 200 }
   validates :picture, presence: true
-  validate  :picture_size
+  validate :picture_size
+  validates :rate, presence: true
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 
   def love(user)
     likes.create(user_id: user.id)
@@ -36,7 +40,6 @@ class Micropost < ApplicationRecord
   end
 
   private
-
     def picture_size
       if picture.size > 5.megabytes
         errors.add(:picture, "画像サイズを5MB以下にしてください")

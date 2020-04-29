@@ -16,7 +16,7 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     flash[:success] = "投稿を削除しました"
-    redirect_to request.referrer || root_url
+    redirect_to root_url
   end
 
   def new
@@ -30,9 +30,8 @@ class MicropostsController < ApplicationController
   end
 
   private
-
     def micropost_params
-      params.require(:micropost).permit(:content, :picture, :rate)
+      params.require(:micropost).permit(:content, :picture, :rate, :address, :latitude, :longitude)
     end
 
     def correct_user

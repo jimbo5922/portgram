@@ -23,6 +23,48 @@
     </span>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  function initMap() {
+    test = {lat: <%= @micropost.latitude %>, lng: <%= @micropost.longitude %>};
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: test
+    });
+
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = '住所：<%= @micropost.address %>';
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+      position:test,
+      map: map,
+      title: contentString
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcM2Lg31EOag89Tn3dR5uC9l5KtIB1WSw&callback=initMap" async defer></script>
+
+<p id="notice"><%= notice %></p>
+
+<style type="text/css">
+  #map { height: 400px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:left;
+    width: 70%;}
+</style>
+<div id="map"></div>
+
 <div class="comment-form">
   <%= form_for([@micropost, @comment]) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
