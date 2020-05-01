@@ -7,7 +7,7 @@
         <div class="user_avatars">
           <% @users.each do |user| %>
             <div class="follow_index">
-              <%= link_to gravatar_for(user, size: 30), user %>
+              <%= link_to image_tag(user.usericon, class: "usericon", :size => "30x30"), user %>
               <%= link_to user.name, user %>
             </div>
           <% end %>
