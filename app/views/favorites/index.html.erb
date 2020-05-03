@@ -1,7 +1,11 @@
-<% if @favorite_microposts.any? %>
-  <ol class="microposts">
-    <%= render @favorite_microposts %>
-  </ol>
-<% else %>
-  <h2>お気に入りした投稿はありません</h2>
-<% end %>
+<div class="row">
+  <div class="col-md-8">
+      <% if @favorite_microposts.any? %>
+        <ol class="microposts">
+          <%= render @favorite_microposts %>
+        </ol>
+      <% else %>
+        <h2>お気に入りした投稿はありません</h2>
+      <% end %>
+  </div>
+</div>

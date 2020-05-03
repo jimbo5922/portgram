@@ -11,7 +11,7 @@ class LikesController < ApplicationController
         format.js
       end
     end
-    redirect_to root_url
+    redirect_to @micropost
   end
 
   def destroy
@@ -24,6 +24,6 @@ class LikesController < ApplicationController
         format.js
       end
     end
-    redirect_to root_url
+    redirect_to @micropost
   end
 end

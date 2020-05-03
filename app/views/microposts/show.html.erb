@@ -1,78 +1,109 @@
-<li id="@micropost-<%= @micropost.id %>" data-@micropost-id="<%= @micropost.id %>">
-  <%= link_to image_tag(@user.usericon, class: "usericon", :size => "50x50"), @micropost.user %>
-  <%= link_to @micropost.user.name, @micropost.user %>
-  <span class="content">
-    <%= @micropost.content %>
-    <%= image_tag @micropost.picture.url if @micropost.picture? %>
-  </span>
-  <span class="timestamp">
-    <%= time_ago_in_words(@micropost.created_at) %>前に投稿
-    <% if current_user?(@micropost.user) %>
-      <%= link_to "削除", @micropost, method: :delete, data: { confirm: "削除してもよろしいですか？" } %>
-    <% end %>
-  </span>
-</li>
+<div class="row">
+  <div class="col-md-8">
+    <li class="microposts" id="@micropost-<%= @micropost.id %>" data-@micropost-id="<%= @micropost.id %>">
+      <%= link_to image_tag(@user.usericon, class: "usericon", :size => "50x50"), @micropost.user %>
+      <%= link_to @micropost.user.name, @micropost.user %>
 
-<div class="comment_index">
-  <% @micropost.comments.each do |comment| %>
-    <% comment_user = comment.user %>
-    <%= link_to image_tag(comment_user.usericon, class: "usericon", :size => "30x30"), comment.user %>
-    <%= link_to comment.user.name, comment.user %>
-    <%= comment.content %>
-    <%= time_ago_in_words(comment.created_at) %>前に投稿
-    <span class="delete">
-      <%= link_to "削除", [@micropost, comment], method: :delete if current_user?(comment.user) %>
-    </span>
-  <% end %>
-</div>
+      <span class="content">
+        <%= @micropost.content %>
+        <span class="timestamp">
+          <%= time_ago_in_words(@micropost.created_at) %>前に投稿
+          <% if current_user?(@micropost.user) %>
+            <%= link_to "削除", @micropost, method: :delete, data: { confirm: "削除してもよろしいですか？" } %>
+          <% end %>
+        </span>
+        <%= image_tag @micropost.picture.url if @micropost.picture? %>
+      </span>
 
-<script type="text/javascript">
-  function initMap() {
-    test = {lat: <%= @micropost.latitude %>, lng: <%= @micropost.longitude %>};
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: test
-    });
+      <script type="text/javascript">
+        function initMap() {
+          test = {lat: <%= @micropost.latitude %>, lng: <%= @micropost.longitude %>};
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: test
+          });
 
-    var transitLayer = new google.maps.TransitLayer();
-    transitLayer.setMap(map);
+          var transitLayer = new google.maps.TransitLayer();
+          transitLayer.setMap(map);
 
-    var contentString = '住所：<%= @micropost.address %>';
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
+          var contentString = '住所：<%= @micropost.address %>';
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
 
-    var marker = new google.maps.Marker({
-      position:test,
-      map: map,
-      title: contentString
-    });
+          var marker = new google.maps.Marker({
+            position:test,
+            map: map,
+            title: contentString
+          });
 
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-  }
-</script>
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+      </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcM2Lg31EOag89Tn3dR5uC9l5KtIB1WSw&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcM2Lg31EOag89Tn3dR5uC9l5KtIB1WSw&callback=initMap" async defer></script>
 
-<p id="notice"><%= notice %></p>
+      <p id="notice"><%= notice %></p>
 
-<style type="text/css">
-  #map { height: 400px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:left;
-    width: 70%;}
-</style>
-<div id="map"></div>
+      <style type="text/css">
+        #map { height: 400px;
+          float:right;
+          margin-left:auto;
+          margin-right:auto;
+          margin-bottom:10px;
+          text-align:left;
+          width: 92%;}
+      </style>
 
-<div class="comment-form">
-  <%= form_for([@micropost, @comment]) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-    <div class="field">
-      <%= f.text_area :content, placeholder: "コメントを入力" %>
+      <div id="map"></div>
+
+      <div class="bottom-info">
+        <span class="like">
+          <%= render "likes/like", micropost: @micropost %>
+
+          <% if @micropost.favorited_by?(current_user) %>
+            <p><%=link_to "お気に入り解除", micropost_favorites_path(@micropost.id), method: :delete %></p>
+          <% else %>
+            <p><%=link_to "お気に入りする", micropost_favorites_path(@micropost.id), method: :post %></p>
+          <% end %>
+        </span>
+
+        <span class="rating">
+          <p>海水浴場の評価：<%= @micropost.rate %></p>
+        </span>
+      </div>
+
+      <div class="comment_index">
+        <% @micropost.comments.each do |comment| %>
+          <ul class="comments">
+            <span class="comment_user">
+              <% comment_user = comment.user %>
+              <%= link_to image_tag(comment_user.usericon, class: "usericon", :size => "30x30"), comment.user %>
+              <%= link_to comment.user.name, comment.user %>
+            </span>
+            <span class="content">
+              <%= comment.content %>
+            </span>
+            <span class="comment_timestamp">
+              <%= time_ago_in_words(comment.created_at) %>前に投稿
+              <%= link_to "削除", [@micropost, comment], method: :delete,
+              data: { confirm: "コメントを削除してもよろしいですか？" } if current_user?(comment.user) %>
+            </span>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="comment_form">
+        <%= form_for([@micropost, @comment]) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+          <div class="field">
+            <%= f.text_area :content, placeholder: "コメントを入力" %>
+          </div>
+          <%= f.submit "投稿", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
-    <%= f.submit "投稿", class: "btn btn-primary" %>
-  <% end %>
-</div>
+  </div>
+</li>

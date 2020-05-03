@@ -1,16 +1,21 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-  <%= link_to "Portgram", root_path, id: "logo" %>
+    <%= link_to "Portgram", root_path, id: "logo" %>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
-          <li><%= link_to "投稿", newpost_path %></li>
-          <li><%= link_to "お気に入り", user_favorites_url(current_user) %></li>
-          <li><%= link_to "マイページ", current_user %></li>
-          <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
-          <!-- 最終的には上記リンクはfontawesome化 -->
+    <% if logged_in? %>
+      <ul class="nav navbar-nav navbar-center">
+        <%= form_tag root_path, :method => 'get' do %>
+          <%= text_field_tag :search, params[:search], placeholder: "投稿を検索" %>
+          <%= submit_tag "検索", :name => nil, class: "btn btn-primary" %>
         <% end %>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "投稿", newpost_path %></li>
+        <li><%= link_to "お気に入り", user_favorites_url(current_user) %></li>
+        <li><%= link_to "マイページ", current_user %></li>
+        <li><%= link_to "ログアウト", logout_path, method: :delete %></li>    
+      </ul>
+    <% end %>
     </nav>
   </div>
 </header>
