@@ -12,6 +12,7 @@ class Micropost < ApplicationRecord
   validates :picture, presence: true
   validate :picture_size
   validates :rate, presence: true
+  validates :address, presence: true
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 

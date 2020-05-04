@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :logged_in_user, only: [:create, :destroy]
+
   def create
     @micropost = Micropost.find(params[:micropost_id])
     @comment = @micropost.comments.build(comment_params)
@@ -7,7 +9,7 @@ class CommentsController < ApplicationController
       flash[:success] = "投稿しました"
       redirect_to micropost_path(@micropost)
     else
-      flash.now[:danger] = "投稿できませんでした"
+      flash[:danger] = "コメントは1〜150字以内で入力してください"
       redirect_to micropost_path(@micropost)
     end
   end

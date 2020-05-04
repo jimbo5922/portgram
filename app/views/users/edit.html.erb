@@ -19,6 +19,7 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
       <span class="picture">
+        <%= f.label :プロフィール画像 %>
         <%= f.file_field :usericon, accept: 'image/jpeg,image/gif,image/png,image/jpg' %>
       </span>
 
@@ -28,10 +29,5 @@
         <%= f.submit "更新", class: "btn btn-primary" %>
       <% end %>
     <% end %>
-
-    <div class="gravatar_edit">
-      <%= image_tag @user.usericon, class: "usericon", :size => "60x60" %>
-      <a href="http://gravatar.com/emails" target="_blank">写真を変更</a>
-    </div>
   </div>
 </div>
