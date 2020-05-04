@@ -1,19 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe LikesController, type: :controller do
-
   describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
+    pending "add some examples to (or delete) #{__FILE__}"
   end
 
   describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
-    end
+    pending "add some examples to (or delete) #{__FILE__}"
   end
-
 end

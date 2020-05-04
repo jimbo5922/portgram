@@ -12,7 +12,7 @@ class Micropost < ApplicationRecord
   validates :picture, presence: true
   validate :picture_size
   validates :rate, presence: true
-  validates :address, presence: true
+  validates :address, presence: true, length: { maximum: 50 }
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
