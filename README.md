@@ -1,6 +1,4 @@
-# README
-
-Portgram
+# Portgram
 
 このwebアプリを作った理由は、海（海水浴場）をもっとみんなに身近なものにしたいという思いからです。
 ここ２、３年で若者を中心に海離れが進んでおり、それを食い止めるために何ができるか私なりに考えた結果です。
@@ -12,25 +10,30 @@ Portgram
 しかし、ただ単に海の写真を投稿するのではインスタグラムと変わりないので、
 私なりの工夫として、投稿した海水浴場の評価機能も実装し、
 口コミサイトとしての側面も持たせることにしました。
-加えて、地図情報も加えたことによりどこの海水浴場なのか直感的にわかるようにもしてあります。
+加えて、地図情報も加えたことによりどこの海水浴場なのか直感的にわかるようにもしました。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## URL
 
-Things you may want to cover:
+## 使用技術
+*Ruby 2.6.3, Rails 6.0.2.1
+*AWS(VPC, EC2)
+*Rspec
+*Google Maps API
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+## 機能一覧
+*ユーザ登録機能
+*プロフィール編集機能
+*ログイン、ログアウト機能(かんたんログイン機能)
+*フォロー、フォロー解除機能(Ajax)
+*フォロー、フォロワー一覧表示機能
+*記事投稿、投稿削除機能
+*投稿一覧、投稿詳細表示機能
+*ページネーション機能
+*いいね！登録、解除機能
+*お気に入り登録、解除、一覧表示機能
+*評価機能
+*住所登録機能
+*Google Maps APIによる地図表示機能
+*コメント投稿、表示、削除機能
+*検索機能(投稿)
+*Rspecによるテスト機能

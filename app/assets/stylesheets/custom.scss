@@ -20,6 +20,12 @@ body {
 #before_login {
   background: image-url("2898370383-thailand_nature-1680x1050-yYz-1440x900-MM-100.jpg");
   background-attachment: fixed;
+  .btn {
+    &:hover {
+      color: white;
+      background-color: #337ab7;
+    }
+  }
 }
 
 section {
@@ -48,6 +54,15 @@ textarea {
 
 .navbar {
   background-color: black;
+}
+
+#follow_form {
+  border: solid 1px gray;
+  .edit_relationship {
+    &:hover {
+      background-color: gray;
+    }
+  }
 }
 
 /* 背景画像が存在するページのみ以下の設定を適用する */
