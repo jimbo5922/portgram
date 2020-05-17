@@ -21,9 +21,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rails-i18n'
 gem 'counter_culture'
 gem 'geocoder'
-gem 'mysql2'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
@@ -38,4 +38,5 @@ end
 
 group :production do
   gem 'fog'
+  gem 'mysql2'
 end

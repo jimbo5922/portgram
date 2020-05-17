@@ -1,21 +1,24 @@
 default: &default
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.sqlite3
+
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
   adapter: mysql2
   encoding: utf8
   pool: 5
   username: root
   password:
   host: localhost
-
-development:
-  <<: *default
-  database: portgram_development
-
-test:
-  <<: *default
-  database: portgram_test
-
-production:
-  <<: *default
+  socket: /tmp/mysql.sock
   database: portgram_production
   username: portgram
   password:
