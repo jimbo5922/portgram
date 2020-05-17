@@ -16,8 +16,8 @@
 
 ## 使用技術
 ・Ruby 2.6.3, Rails 6.0.2.1  
-・nginx  
-・AWS(VPC, EC2)  
+・nginx, unicorn  
+・AWS(VPC, EC2, Route53, ACM, ALB)  
 ・Rspec  
 ・Google Maps API  
 
