@@ -12,6 +12,7 @@ test:
   database: db/test.sqlite3
 
 production:
+  <<: *default
   adapter: mysql2
   encoding: utf8
   pool: 5
@@ -20,5 +21,4 @@ production:
   host: localhost
   socket: /tmp/mysql.sock
   database: portgram_production
-  username: portgram
   password:
