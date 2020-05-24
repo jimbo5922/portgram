@@ -7,13 +7,20 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
         environment:
-          - RAILS_ENV: test
-      - image: circleci/sqlite3
+          RAILS_ENV: test
+          BUNDLER_VERSION: 2.1.4
+      - image: nouchka/sqlite3
 
     executor: ruby/default
 
     steps:
+      - run:
+          command: 'git config --global core.quotepath false'
       - checkout
+
+      - run:  
+          name: Update bundler
+          command: gem update bundler
 
       - run:
           name: Which bundler?
@@ -21,6 +28,30 @@ jobs:
 
       - ruby/bundle-install
 
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      - run:  
+          name: Yarn Install  
+          command: yarn install --cache-folder ~/.cache/yarn
+
+      - run: bundle exec bin/webpack
+
       - run:
-          name: run test
-          command: rspec
+          name: run rspec
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb")"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results

@@ -21,6 +21,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rails-i18n'
 gem 'counter_culture'
 gem 'geocoder'
+gem 'rspec_junit_formatter'
 
 group :development, :test do
   gem 'sqlite3'
@@ -34,6 +35,10 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'capybara'
 end
 
 group :production do
