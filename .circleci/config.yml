@@ -6,10 +6,21 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
+        environment:
+          - RAILS_ENV: test
+      - image: circleci/sqlite3
+
     executor: ruby/default
+
     steps:
       - checkout
+
       - run:
           name: Which bundler?
           command: bundle -v
+
       - ruby/bundle-install
+
+      - run:
+          name: run test
+          command: rspec
