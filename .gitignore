@@ -35,3 +35,5 @@ yarn-debug.log*
 
 # ignore uploaded images
 /public/uploads
+
+.browserslistrc
