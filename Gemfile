@@ -22,6 +22,7 @@ gem 'rails-i18n'
 gem 'counter_culture'
 gem 'geocoder'
 gem 'rspec_junit_formatter'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'sqlite3'

@@ -21,6 +21,7 @@ https://www.portgram-app.com/
 ・Ruby 2.6.3, Rails 6.0.2.1  
 ・webpacker: SASS, Bootstrap, JQuery  
 ・Docker, Docker-compose  
+・Circle CI  
 ・nginx, unicorn  
 ・AWS(VPC, EC2, Route53, ACM, ALB)  
 ・Rspec  
