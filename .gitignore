@@ -34,7 +34,8 @@ yarn-debug.log*
 /vendor/*
 
 # ignore uploaded images
-/public/uploads
+/public/uploads/micropost
+/public/uploads/tmp
 
 .browserslistrc
 .env
