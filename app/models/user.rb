@@ -15,6 +15,8 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validate :usericon_size
+  mount_uploader :usericon, UsericonUploader
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -41,4 +43,11 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  private
+    def usericon_size
+      if usericon.size > 5.megabytes
+        errors.add(:usericon, "画像サイズを5MB以下にしてください")
+      end
+    end
 end

@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_081658) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
-    t.string "usericon", default: "人物アイコン.png", null: false
+    t.string "usericon", default: "defaulticon.png", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
