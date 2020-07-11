@@ -43,4 +43,4 @@ https://www.portgram-app.com/
 ・Google Maps APIによる地図表示機能  
 ・コメント投稿、表示、削除機能  
 ・投稿検索機能  
-・Rspecによるテスト機能 
+・Rspecによるテスト機能  
